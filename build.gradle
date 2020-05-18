@@ -31,7 +31,7 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
-
+//1234
 test {
     useJUnitPlatform()
 }
