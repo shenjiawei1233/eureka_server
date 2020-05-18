@@ -33,7 +33,6 @@ dependencyManagement {
 }
 
 
-//asdf
 test {
     useJUnitPlatform()
 }
