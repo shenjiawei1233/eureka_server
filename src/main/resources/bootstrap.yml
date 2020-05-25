@@ -1,18 +1,19 @@
-spring:
-  application:
-    name: eureka-server
 server:
-  port: 9002
-eureka:
-  instance:
-    hostname: localhost
-    nonSecurePort: ${server.port}
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://localhost:9002/eureka/
+  port: 8761
 
-    security:
-      basic:
-        enabled: false
+eureka:
+  server:
+    enable-self-preservation: false  # 设为false，关闭自我保护
+    eviction-interval-timer-in-ms: 5000  # 配置Eureka Server清理无效节点的时间间隔（单位毫秒，默认是60*1000）
+  #eureka 把自己当做客户端来注册自己
+  client:
+    healthcheck:
+      enabled: true # 开启健康检查（需要spring-boot-starter-actuator依赖）
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/ # 注册到eureka服务器url
+    register-with-eureka: false #表示是否将自己注册到Eureka Server上，默认为truef
+    fetch-registry: false #表示是否从Eureka Server上获取注册信息，默认为true
+  instance: #定义Eureka实例
+    lease-expiration-duration-in-seconds: 30 # 续约更新时间间隔（默认30秒）
+    lease-renewal-interval-in-seconds: 10 # 续约到期时间（默认90秒）
+    prefer-ip-address: true
